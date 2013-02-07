@@ -1,3 +1,27 @@
-assets/
-protected/runtime/
+cgi-bin/
+.htaccess
+
+#################
+## Yii
+#################
+
+assets/*
+.idea/
 themes/classic/views/
+protected/runtime/*
+protected/config/Config_DB.php
+protected/config/Config_Cache.php
+
+############
+## Windows
+############
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+
+# Mac crap
+.DS_Store
