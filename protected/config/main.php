@@ -90,5 +90,7 @@ return array(
     'params'=>array(
         // this is used in contact page
         'adminEmail'=>'admin@socinfo.net.ua',
+	      'dbname'=>'socio',
+	      'db2name'=>'todo',
     ),
 );
