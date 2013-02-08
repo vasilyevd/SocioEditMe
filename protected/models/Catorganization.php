@@ -28,12 +28,30 @@
  * The followings are the available model relations:
  * @property CatorganizationDirection[] $catorganizationDirections
  */
-class WCatorganization extends Catorganization
+class Catorganization extends BaseCatorganization
 {
+
+	private $_dbname;
+
+	/**
+	 * Returns the static model of the specified AR class.
+	 * @param string $className active record class name.
+	 * @return Catorganization the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
+	}
 
 	// отдаём соединение, описанное в компоненте db2
 	public function getDbConnection(){
 		return Yii::app()->db2;
+	}
+
+	public function getDbName(){
+		$name = preg_match("/dbname=([^;]*)/", $this->dbConnection->connectionString, $matches);
+		$this->_dbname = $matches[1];
+		return $this->_dbname;
 	}
 
 	/**
@@ -41,7 +59,7 @@ class WCatorganization extends Catorganization
 	 * возвращаем имя таблицы вместе с именем БД
 	 */
 	public function tableName(){
-		return Yii::app()->params['db2name'].'.org_catorganization';
+		return $this->getDbName().'.org_catorganization';
 	}
 
     /**
@@ -51,7 +69,7 @@ class WCatorganization extends Catorganization
     {
         return array(
             'organization' => array(self::BELONGS_TO, 'Organization', 'organization_id'),
-            'directions' => array(self::MANY_MANY, 'Direction', Yii::app()->params['db2name'].'org_catorganization_direction(catorganization_id, direction_id)'),
+            'directions' => array(self::MANY_MANY, 'Direction', $this->getDbName().'.org_catorganization_direction(catorganization_id, direction_id)'),
         );
     }
 

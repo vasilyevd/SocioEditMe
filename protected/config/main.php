@@ -38,7 +38,7 @@ return array(
     'import'=>array(
 	      //'common.models.*',
 	      //'gext.widgets.*',
-	      'mainproject.protected.models.*',
+	      'mainproject.protected.models.common.*',
 
         'application.models.*',
         'application.models.dostup.*',

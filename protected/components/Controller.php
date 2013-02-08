@@ -62,6 +62,9 @@ class Controller extends CController
 	/** @var string set Class of content container in main layout when is need */
 	public $contentClass = '';
 
+	/** @var string - contains name of model that is main model in controller  */
+	public $work_model_name=NULL;
+
 
 	/**
      * @var array the breadcrumbs of the current page. The value of this property will
@@ -98,4 +101,13 @@ class Controller extends CController
             throw new CHttpException(404,'Не найдено');
         return $model;
     }
+
+
+	public function newModel(){
+		$model= new $this->work_model_name();
+		if($model===null)
+			throw new CHttpException(404,'Something wrong (x0001)');
+		return $model;
+	}
+
 }
